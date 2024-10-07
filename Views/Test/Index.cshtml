@@ -1,0 +1,15 @@
+﻿@model TestViewModel
+@*
+    
+*@
+@{
+    ViewData["Title"] = "Test View";
+}
+
+<h1>Hello From Test Controller</h1>
+<h2>Your name is: @Model.Name</h2>
+
+@if (Model.DateofBirth.HasValue)
+{
+    <h2>Your DoB is: @Model.DateofBirth</h2>
+}
