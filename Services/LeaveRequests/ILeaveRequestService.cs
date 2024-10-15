@@ -7,8 +7,9 @@ namespace LeaveManagementSystem.Web.Services.LeaveRequests
     {
         Task CreateLeaveRequest(LeaveRequestCreateVM model);
         Task<EmployeeLeaveRequestListVM> GetEmployeeLeaveRequest();
-        Task<LeaveRequestListVM> GetAllLeaveRequests();
+        Task<LeaveRequestReadOnlyVM> GetAllLeaveRequests();
         Task CancelLeaveRequest(int leaveRequestId);
         Task ReviewLeaveRequest(ReviewLeaveRequestVM model);
+        Task<bool> RequestDatesExceedAllocation(LeaveRequestCreateVM model);
     }
 }
