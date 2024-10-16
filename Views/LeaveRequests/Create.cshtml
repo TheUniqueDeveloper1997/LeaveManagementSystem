@@ -35,7 +35,7 @@
             <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-success" />
-                <a asp-controller="LeaveAllocation" asp-action="Details" class="btn btn-danger">Cancel</a>
+                <a asp-action="Index" class="btn btn-danger">Cancel</a>
             </div>
         </form>
     </div>
@@ -43,4 +43,18 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+      $(function() {
+          $("#StartDate").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+          });
+          $("#EndDate").datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true
+          });
+      });
+    </script>
 }

@@ -14,7 +14,8 @@ public class LeaveRequestsController(ILeaveTypesService _leaveTypesService,
     //employee view requests
     public async Task<IActionResult> Index()
     {
-        return View();
+        var model = await _leaveRequestService.GetEmployeeLeaveRequest();
+        return View(model);
     }
 
     //Employee create requests
@@ -56,28 +57,32 @@ public class LeaveRequestsController(ILeaveTypesService _leaveTypesService,
     //Employee cancel requests
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Cancel(int leaveRequestId)
+    public async Task<IActionResult> Cancel(int id)
     {
-        return View();
+        await _leaveRequestService.CancelLeaveRequest(id);
+        return RedirectToAction(nameof(Index));
     }
 
     //Admin/Supe review requests
     public async Task<IActionResult> ListRequests()
     {
-        return View();
+        var model = await _leaveRequestService.AdminGetAllLeaveRequests();
+        return View(model);
     }
 
     //Admin/Supe review requests
-    public async Task<IActionResult> Review(int leaveRequestId)
+    public async Task<IActionResult> Review(int id)
     {
-        return View();
+        var model = await _leaveRequestService.GetLeaveRequestForReview(id);
+        return View(model);
     }
 
     //Admin/Supe review requests
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Review()
+    public async Task<IActionResult> Review(int id, bool approved)
     {
-        return View();
+        await _leaveRequestService.ReviewLeaveRequest(id, approved);
+        return RedirectToAction(nameof(ListRequests));
     }
 }
