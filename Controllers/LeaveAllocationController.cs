@@ -1,12 +1,11 @@
 ﻿using LeaveManagementSystem.Web.Models.LeaveAllocations;
 using LeaveManagementSystem.Web.Services.LeaveAllocations;
 using LeaveManagementSystem.Web.Services.LeaveTypes;
-using Microsoft.AspNetCore.Mvc;
 
 namespace LeaveManagementSystem.Web.Controllers
 {
     [Authorize]
-    public class LeaveAllocationController(ILeaveAllocationsService _leaveAllocationsService, ILeaveTypesService _leaveTypesService) 
+    public class LeaveAllocationController(ILeaveAllocationsService _leaveAllocationsService, ILeaveTypesService _leaveTypesService)
         : Controller
     {
         [Authorize(Roles = Roles.Administrator)]
@@ -21,7 +20,7 @@ namespace LeaveManagementSystem.Web.Controllers
         public async Task<IActionResult> AllocateLeave(string? id)
         {
             await _leaveAllocationsService.AllocateLeave(id);
-            return RedirectToAction(nameof(Details), new {userId = id});
+            return RedirectToAction(nameof(Details), new { userId = id });
         }
         public async Task<IActionResult> EditAllocation(int? id)
         {
