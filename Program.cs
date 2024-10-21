@@ -5,7 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 DataServicesRegistration.AddDataServices(builder.Services, builder.Configuration);
 ApplicationServicesRegistration.AddApplicationServices(builder.Services);
-
 builder.Host.UseSerilog((ctx, config) => 
     config.WriteTo.Console()
     .ReadFrom.Configuration(ctx.Configuration)
@@ -19,7 +18,12 @@ builder.Services.AddAuthorization(options =>
     });
 });
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = false;
+})
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
